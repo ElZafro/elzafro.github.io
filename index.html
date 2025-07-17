@@ -20,51 +20,48 @@
         function calculateYearDifference(date1, date2) {
             return new Date(date2 - date1).getTime() / 365 / 24 / 3600000;
         }
-
         setInterval(() => {
             const age = document.getElementById("age");
             const now = new Date().getTime();
             age.innerText = calculateYearDifference(1041289200_000, now).toString().substring(0, 12);
         }, 60);
-
     </script>
 </head>
 
 <body class="max-h-screen h-screen bg-[#121212] text-white bg-dotted p-4 flex flex-col font-display">
-    <div class="w-11/12 h-11/12 flex flex-row gap-2 m-auto justify-around">
-        <div class="flex justify-center flex-col max-w-1/2">
-            <h1 class="font-bold text-8xl">Hi!</h1>
-            <h2 class="text-neutral-400 text-xl">
+    <div class="w-11/12 h-11/12 flex flex-col lg:flex-row gap-4 lg:gap-2 m-auto justify-around lg:justify-around">
+        <div class="flex justify-center flex-col max-w-full lg:max-w-1/2 text-center lg:text-left">
+            <h1 class="font-bold text-4xl sm:text-6xl lg:text-8xl">Hi!</h1>
+            <h2 class="text-neutral-400 text-lg lg:text-xl">
                 I'm
                 <span
                     class="bg-[linear-gradient(135deg,#be4ffe_0%,#fe00cb_100%)] bg-clip-text text-transparent">Jaime</span>,
                 a <span id="age">22</span> year old systems programmer.
             </h2>
-            <p class="text-neutral-400 text-lg mt-5">
+            <p class="text-neutral-400 text-base lg:text-lg mt-5">
                 I'm interested in High Performance Computing, Graphics Programming, Compilers, Game Engines, and most
                 other things running on silicon.
             </p>
             <hr>
-            <div class="flex flex-row justify-around">
+            <div class="flex flex-row justify-center lg:justify-around">
                 <a href="https://github.com/elzafro" target="_blank" rel="noopener noreferrer" class="w-max">
                     <i
                         class="fa-brands fa-github text-3xl text-neutral-700 hover:text-white hover:scale-110 transition-all duration-300 cursor-pointer"></i>
                 </a>
             </div>
-
-
         </div>
-        <div class="h-full flex justify-center flex-col">
+        <div class="h-64 lg:h-full flex justify-center flex-col items-center">
             <div class="relative animate-float">
-                <div class="h-120 w-120 bg-neutral-900 opacity-80 border border-neutral-700 rounded-xl
-                flex flex-row justify-center
-                overflow-hidden">
+                <div class="h-64 w-64 lg:h-120 lg:w-120 bg-neutral-900 opacity-80 border border-neutral-700 rounded-xl
+ flex flex-row justify-center
+ overflow-hidden">
                     <a href="/fourier.html" class="absolute top-2 left-2">Wanna try? ↗</a>
                     <canvas id="final"></canvas>
                 </div>
             </div>
         </div>
     </div>
+</body>
 </body>
 
 </html>
