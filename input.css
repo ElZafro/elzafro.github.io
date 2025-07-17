@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+    --font-display: "Cascadia Code", "sans-serif";
+}
+
+@layer base {
+    .bg-dotted {
+        background-image: radial-gradient(circle at 1px 1px, #555 1px, transparent 0);
+        background-size: 40px 40px;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(-15px);
+    }
+
+    50% {
+        transform: translateY(15px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+hr {
+    margin: 1em 0;
+}
