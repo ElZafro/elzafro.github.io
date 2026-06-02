@@ -1,4 +1,4 @@
-export function drawSvg(file, canvas) {
+export function drawSvg(file, canvas, palette) {
 
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
@@ -29,7 +29,8 @@ export function drawSvg(file, canvas) {
             worker.postMessage({
                 offscreenCanvas,
                 dpr,
-                state //TODO: Avoid copying state, move instead
+                state, //TODO: Avoid copying state, move instead
+                palette: palette.map(x => parseInt(x.slice(1), 16)),
             }, [offscreenCanvas]);
         } else {
             alert("Error: No <path> element with a 'd' attribute found in the selected SVG file.");
@@ -154,7 +155,7 @@ function setup(svgPathData, state) {
 
     const scaleX = state.canvasSize.width / (bounds.maxX - bounds.minX);
     const scaleY = state.canvasSize.height / (bounds.maxY - bounds.minY);
-    const scale = Math.min(scaleX, scaleY) * 0.8;
+    const scale = Math.min(scaleX, scaleY) * 0.7;
 
     const scaledVertices = centeredVertices.map(p => ({ x: p.x * scale, y: p.y * scale }));
 
@@ -212,8 +213,8 @@ function lerp(x, y, t) {
     };
 }
 
-export function animate(ctx, state, frame, dpr) {
-    requestAnimationFrame(() => { animate(ctx, state, (frame + 1), dpr); });
+export function animate(ctx, state, frame, dpr, palette) {
+    requestAnimationFrame(() => { animate(ctx, state, (frame + 1), dpr, palette); });
     ctx.clearRect(0, 0, state.canvasSize.width, state.canvasSize.height);
 
     const startX = state.canvasSize.width / 2;
@@ -230,7 +231,7 @@ export function animate(ctx, state, frame, dpr) {
         ctx.lineWidth = 2 / dpr;
 
         const alpha = calcAlpha((c + 1) / gradients);
-        const { r, g, b } = lerp(0xbe4ffe, 0xfe00cb, c / gradients);
+        const { r, g, b } = lerp(palette[0], palette[1], c / gradients);
 
         ctx.strokeStyle = `rgba(
         ${r},
